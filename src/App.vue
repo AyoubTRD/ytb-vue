@@ -3,11 +3,11 @@
     <SearchBar @termChange="handleSearch" />
     <div class="container">
       <div class="row">
-        <div class="col s12 m6">
-          <VideoDetail />
+        <div class="col s12 m8">
+          <VideoDetail :video="video" />
         </div>
-        <div class="col s12 m6">
-          <VideoList :videos="videos" />
+        <div class="col s12 m4">
+          <VideoList :videos="videos" @playVideo="onPlayVideo" />
         </div>
       </div>
     </div>
@@ -21,18 +21,19 @@ import VideoDetail from "./components/VideoDetail";
 
 import axios from "axios";
 
-const API_KEY = "AIzaSyB8IAfuXNA0EJNcftDcuG3MBIorGcJCgrA";
+const API_KEY = "AIzaSyCy_njHT-owQOxbucy07ksd1QrZTfVtZnU";
 
 export default {
   name: "App",
   components: {
     SearchBar,
     VideoList,
-    VideoDetail
+    VideoDetail,
   },
   data() {
     return {
-      videos: []
+      videos: [],
+      video: 0,
     };
   },
   methods: {
@@ -45,16 +46,24 @@ export default {
             type: "video",
             part: "snippet",
             q: term,
-            maxResults: 30
-          }
+            maxResults: 30,
+          },
         }
       );
-      this.videos = res.data.items.map(item => ({
+      this.videos = res.data.items.map((item) => ({
         ...item.snippet,
-        videoId: item.id.videoId
+        videoId: item.id.videoId,
       }));
-    }
-  }
+    },
+    onPlayVideo(video) {
+      this.video = video;
+      console.log(this.video.videoId);
+      if (window.player) {
+        console.log("updating the id");
+        window.player.loadVideoById(this.video.videoId);
+      }
+    },
+  },
 };
 </script>
 

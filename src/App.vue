@@ -21,7 +21,7 @@ import VideoDetail from "./components/VideoDetail";
 
 import axios from "axios";
 
-const API_KEY = "AIzaSyCy_njHT-owQOxbucy07ksd1QrZTfVtZnU";
+const API_KEY = "AIzaSyCavhwsTKqVzb4nj89nyQqN3cLIBWaK_Ec";
 
 export default {
   name: "App",

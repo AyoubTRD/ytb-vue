@@ -27,10 +27,15 @@ export default {
     // eslint-disable-next-line no-unused-vars
     window.onYouTubeIframeAPIReady = () => {
       console.log("YT Loaded");
-      window.player = new window.YT.Player("player", {
-        width: "100%",
-        videoId: "M7lc1UVf-VE",
-      });
+      try {
+        window.player = new window.YT.Player("player", {
+          width: "100%",
+          videoId: "M7lc1UVf-VE",
+        });
+      } catch(e) {
+        console.log("Just ignore this:")
+        console.log(e)
+      }
     };
   },
 };
